@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Community Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Section-->
+     <nav>
+        <h2>Community Portal</h2>
+
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events-section">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#registration">Register</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="help.html" target="_blank">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Section -->
+     <main>
+        <section id="home" class="fullscreen-hero">
+            <div id="welcomeBanner">
+                <h1>Welcome to the Local Community Portal</h1>
+
+                <p>
+                    Residents can explore and register for local events,
+                    workshops, hackathons, cultural festivals, and
+                    community engagement programs.
+                </p>
+
+                <div class="portal-card">
+                    <p>
+                        Register today and get
+                        <span class="highlight">50% discount</span>
+                        on premium events.
+                    </p>
+                </div>
+
+                <a href="#events-section" class="explore-btn">Explore Events</a>
+            </div>
+        </section>
+        <section class="events-section" id="events-section">
+
+<h2>Upcoming Events</h2>
+
+<div class="event-controls">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search events..."
+    >
+
+    <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Music">Music</option>
+        <option value="Technology">Technology</option>
+        <option value="Art">Art</option>
+        <option value="Food">Food</option>
+        <option value="Health">Health</option>
+    </select>
+
+    <button id="registerBtn" type="button">
+        Toggle Event Cards
+    </button>
+</div>
+
+<div id="loader">Loading Events...</div>
+
+<div id="eventsContainer"></div>
+
+        </section>
+
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+
+            <div class="portal-card">
+                <p>Email: communityportal@gmail.com</p>
+                <p>Phone: +91 9876543210</p>
+                <p>Address: Community Council Building, Andhra Pradesh</p>
+            </div>
+        </section>
+
+
+        <section id = "gallery">
+            <h2>Community Event Gallery</h2>
+
+            <div class="table-container">
+            <table cellspacing="15">
+                <tr>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop"
+                        alt="Music Event"
+                        title="Community Music Festival"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Music Festival</p>
+                    </td>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop"
+                        alt="Food Festival"
+                        title="Local Food Festival"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Local Food Festival</p>
+                    </td>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200&auto=format&fit=crop"
+                        alt="Sports Event"
+                        title="Community Sports Meet"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Sports Meeting</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1200&auto=format&fit=crop"
+                        alt="Workshop"
+                        title="Skill Development Workshop"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Workshop</p>
+                    </td>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop"
+                        alt="Volunteering"
+                        title="Community Volunteering"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Volunteering</p>
+                    </td>
+                    <td>
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop"
+                        alt="Cultural Event"
+                        title="Cultural Celebrations"
+                        class="eventImage"
+                        ondblclick="enlargeImage(this)">
+                        <p>Cultural Event</p>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </section>
+
+        <section id="communityBulletin">
+            <h2>Community Bulletin</h2>
+
+            <div class="news-article">
+                <p>
+                    The Local Community Event Portal continues to connect residents,
+                    volunteers, students, and local organizations through workshops,
+                    hackathons, cultural programs, startup events, and social awareness
+                    campaigns. Residents are encouraged to actively participate in
+                    upcoming environmental drives, AI awareness sessions, mentoring
+                    programs, sports meets, and cultural festivals happening across
+                    different community blocks throughout the city.
+                </p>
+            </div>
+        </section>
+
+        <section id = "registration">
+            <h2>Event Registration Form</h2>
+
+            <div class="success">
+                Early registrations are now open for all premium community events.
+            </div>
+            <form id="registrationForm" action="backend/register.php" method="post">
+
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="username" placeholder="Enter your full name" required>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+                <label for="date">Event Date</label>
+                <input type="date" id="date" name="eventDate" required>
+
+                <label for="event" required>Select Event</label>
+                <select id="eventType" name="eventName" required onchange="showFee()">
+                    <option value="">--Select an Event--</option>
+                    <option value="music">Music Festival</option>
+                    <option value="food">Local Food Festival</option>
+                    <option value="sports">Community Sports Meet</option>
+                    <option value="workshop">Skill Development Workshop</option>
+                    <option value="volunteer">Community Volunteering</option>
+                    <option value="cultural">Cultural Celebrations</option>
+                </select>
+
+                <p id="feeDisplay"></p>
+                <div id="eventDetails"></div>
+
+                <p class="char-count-container">
+                    <span class="char-count-label">Characters Typed:</span>
+                    <span id="charCount">0</span>
+                </p>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Enter your message" onkeyup="countCharacters()"></textarea>
+                <button type = "submit">Register</button>
+                <button type = "button" onclick="clearPreferences()">Clear Preferences</button>
+
+                <p id="formMessage"></p>
+                <output id="confirmation"></output>
+            </form>
+        </section>
+        <section id="promoVideo" class="portal-card centered-video-section">
+            <h2>Community Event Promo</h2>
+            <video width="600" controls autoplay loop oncanplay="videoReady()">
+            <source src="assets/videos/promo.mp4" type="video/mp4">
+                Your browser does not support the video playback.
+            </video>
+            <p id="videoStatus"></p>
+        </section>
+        <section id="locationSection" class="portal-card">
+            <h2>Find Nearby Events</h2>
+            <p>Select your location to find events near you:</p>
+            <select id="locationSelect" class="full-width">
+                <option value="">-- Select Your Block/Building --</option>
+                <option value="blockA">Block A (Main Block)</option>
+                <option value="blockB">Block B (Beside Block A)</option>
+                <option value="blockC">Block C (Near to Block A)</option>
+                <option value="blockD">Block D (Far End)</option>
+            </select>
+            <button id="findEventsBtn" type="button" class="full-width-btn">Find Nearby Events</button>
+            <div id="nearbyEventsResult"></div>
+        </section>
+     </main>
+
+     <section>
+        <h2>Popular Community Activities</h2>
+
+        <ul class="event-list">
+            <li>Hackathons</li>
+            <li>Community Workshops</li>
+            <li>Cultural Festivals</li>
+            <li>Volunteer Programs</li>
+            <li>Sports Activities</li>
+        </ul>
+    </section>
+     <!-- Footer Section -->
+      <footer>
+        <p>
+            &copy; 2026 Local Community Council. All rights reserved.
+        </p>
+      </footer>
+
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      <script src="main.js"></script>
+</body>
+</html>

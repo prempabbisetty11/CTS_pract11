@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 6 - Event Helpers</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        #eventBox{
+            width: 350px;
+            height: 150px;
+            margin: 20px auto;
+            border: 2px solid black;
+            background-color: lightblue;
+            line-height: 150px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        input{
+            padding: 10px;
+            width: 250px;
+        }
+
+        button{
+            padding: 10px 15px;
+            margin: 10px;
+        }
+
+        #message{
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #itemStatus {
+            min-height: 22px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .box {
+            width: 200px;
+            height: 80px;
+            background: lightblue;
+            border: 2px solid black;
+            margin: 10px auto;
+            line-height: 80px;
+        }
+
+        section {
+            margin: 30px 0;
+        }
+
+        #colorBox {
+            width: 250px;
+            height: 120px;
+            border: 2px solid black;
+            background: white;
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            width: 300px;
+            margin: 15px auto;
+            padding: 0;
+        }
+
+        li {
+            background: #f2f2f2;
+            margin: 5px;
+            padding: 8px;
+        }
+
+        hr {
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>jQuery Practice Portal</h1>
+
+    <section>
+        <h2>Exercise 2 - Element Selection</h2>
+        <h3 id="heading">Welcome</h3>
+        <p>This is Paragraph 1</p>
+        <p id="para2">This is Paragraph 2</p>
+        <button id="hideParaBtn">Hide Paragraph</button>
+        <button id="showParaBtn">Show Paragraph</button>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Exercise 3 - jQuery Methods</h2>
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+
+        <button id="hideBtn">Hide</button>
+        <button id="showBtn">Show</button>
+        <button id="fadeOutBtn">Fade Out</button>
+        <button id="fadeInBtn">Fade In</button>
+        <button id="toggleBtn">Toggle</button>
+        <button id="chainBtn">Chain Effect</button>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Exercise 4 - DOM Manipulation</h2>
+        <input type="text" id="itemInput" placeholder="Enter item">
+        <button id="addBtn">Add Item</button>
+        <button id="removeBtn">Remove All</button>
+        <p id="itemStatus"></p>
+        <ul id="itemList"></ul>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Exercise 5 - Color Events</h2>
+        <button id="colorBtn">Change Color</button>
+        <div id="colorBox"></div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Exercise 6 - Event Helpers</h2>
+        <div id="eventBox">Hover or Click Me</div>
+        <button id="clickBtn">Click Event</button>
+        <br><br>
+        <input type="text" id="nameInput" placeholder="Type something">
+        <p id="message"></p>
+    </section>
+
+    <script>
+        $(document).ready(function(){
+            function showItemStatus(message){
+                $("#itemStatus").text(message);
+            }
+
+            function renderItems(items){
+                $("#itemList").empty();
+
+                $.each(items, function(index, item){
+                    $("<li>").text(item.name).appendTo("#itemList");
+                });
+            }
+
+            function loadItems(){
+                $.getJSON("items.php", { action: "list" })
+                    .done(function(response){
+                        if(response.success){
+                            renderItems(response.items);
+                            showItemStatus("");
+                        } else {
+                            showItemStatus(response.message);
+                        }
+                    })
+                    .fail(function(){
+                        showItemStatus("Database request failed.");
+                    });
+            }
+
+            loadItems();
+
+            $("#heading").text("Welcome to jQuery");
+
+            $("#hideParaBtn").click(function(){
+                $("#para2").hide();
+            });
+
+            $("#showParaBtn").click(function(){
+                $("#para2").show();
+            });
+
+            $("#hideBtn").click(function(){
+                $(".box").hide();
+            });
+
+            $("#showBtn").click(function(){
+                $(".box").show();
+            });
+
+            $("#fadeOutBtn").click(function(){
+                $(".box").fadeOut();
+            });
+
+            $("#fadeInBtn").click(function(){
+                $(".box").fadeIn();
+            });
+
+            $("#toggleBtn").click(function(){
+                $(".box").toggle();
+            });
+
+            $("#chainBtn").click(function(){
+                $(".box").slideUp().delay(1000).slideDown();
+            });
+
+            $("#addBtn").click(function(){
+                let value = $("#itemInput").val();
+
+                if(value !== ""){
+                    $.ajax({
+                        url: "items.php",
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            action: "add",
+                            name: value
+                        }
+                    }).done(function(response){
+                        if(response.success){
+                            $("#itemInput").val("");
+                            loadItems();
+                        } else {
+                            showItemStatus(response.message);
+                        }
+                    }).fail(function(){
+                        showItemStatus("Item could not be saved.");
+                    });
+                }
+            });
+
+            $("#removeBtn").click(function(){
+                $.ajax({
+                    url: "items.php",
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        action: "clear"
+                    }
+                }).done(function(response){
+                    if(response.success){
+                        renderItems([]);
+                        showItemStatus(response.message);
+                    } else {
+                        showItemStatus(response.message);
+                    }
+                }).fail(function(){
+                    showItemStatus("Items could not be removed.");
+                });
+            });
+
+            $("#colorBtn").click(function(){
+                $("#colorBox").css("background-color", "red");
+            });
+
+            $("#colorBtn").dblclick(function(){
+                $("#colorBox").css("background-color", "white");
+            });
+
+            $("#clickBtn").click(function(){
+                $("#message").text("Button Clicked!");
+            });
+
+            $("#clickBtn").dblclick(function(){
+                $("#message").text("Button Double Clicked!");
+            });
+
+            $("#eventBox").mouseenter(function(){
+                $(this).css("background-color","lightgreen");
+                $(this).text("Mouse Entered");
+            });
+
+            $("#eventBox").mouseleave(function(){
+                $(this).css("background-color","lightblue");
+                $(this).text("Mouse Left");
+            });
+
+            $("#nameInput").keypress(function(event){
+                $("#message").text("You Pressed: " + event.key);
+            });
+
+        });
+    </script>
+
+</body>
+</html>
