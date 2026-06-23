@@ -3,7 +3,7 @@
 using NUnit.Framework;
 
 [TestFixture]
-public class CalculatorTests
+public class ParameterizedCalculatorTests
 {
     [TestCase(10,5,5)]
     [TestCase(20,10,10)]
