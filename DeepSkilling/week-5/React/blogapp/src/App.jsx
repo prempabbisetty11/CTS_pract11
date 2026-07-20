@@ -1,0 +1,3 @@
+import React from 'react';
+class Posts extends React.Component{constructor(props){super(props);this.state={posts:[],error:null}} async loadPosts(){const response=await fetch('https://jsonplaceholder.typicode.com/posts'); const posts=await response.json(); this.setState({posts:posts.slice(0,10)});} componentDidMount(){this.loadPosts().catch(error=>this.setState({error:error.message}))} componentDidCatch(error){alert(error.message)} render(){return <main className="app"><h1>Blog Posts</h1>{this.state.error&&<p className="danger">{this.state.error}</p>}{this.state.posts.map(post=><article className="panel" key={post.id}><h2>{post.title}</h2><p>{post.body}</p></article>)}</main>}}
+export default function App(){return <Posts/>}

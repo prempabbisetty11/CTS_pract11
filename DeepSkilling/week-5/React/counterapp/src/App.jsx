@@ -1,0 +1,3 @@
+import React from 'react';
+class CountPeople extends React.Component{constructor(props){super(props);this.state={entrycount:0,exitcount:0};this.UpdateEntry=this.UpdateEntry.bind(this);this.UpdateExit=this.UpdateExit.bind(this)} UpdateEntry(){this.setState(s=>({entrycount:s.entrycount+1}))} UpdateExit(){this.setState(s=>({exitcount:s.exitcount+1}))} render(){return <section className="panel"><h1>Mall People Counter</h1><button onClick={this.UpdateEntry}>Login</button><button className="secondary" onClick={this.UpdateExit}>Exit</button><h2>{this.state.entrycount} people entered</h2><h2>{this.state.exitcount} people exited</h2></section>}}
+export default function App(){return <main className="app"><CountPeople/></main>}

@@ -1,0 +1,2 @@
+function CalculateScore({name,school,total,goal}){const average=(total/goal).toFixed(2);return <section className="score-card"><h2>Student Score</h2><p><b>Name:</b> {name}</p><p><b>School:</b> {school}</p><p><b>Total:</b> {total}</p><p><b>Goal:</b> {goal}</p><p className="average">Average Score: {average}</p></section>}
+export default function App(){return <main className="app"><CalculateScore name="Steeve" school="DNV Public School" total={284} goal={3}/></main>}
