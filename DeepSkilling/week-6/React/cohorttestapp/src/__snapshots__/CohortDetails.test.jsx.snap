@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Cohort Details Component > should always render same html 1`] = `
+<div>
+  <section
+    class="panel"
+  >
+    <h3>
+      INTADMDF10
+    </h3>
+    <p>
+      ADM .NET FSD
+    </p>
+    <p>
+      ongoing
+    </p>
+    <p>
+      John
+    </p>
+  </section>
+</div>
+`;

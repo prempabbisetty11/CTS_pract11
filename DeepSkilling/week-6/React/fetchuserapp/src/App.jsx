@@ -1,0 +1,3 @@
+import React from 'react';
+class Getuser extends React.Component{state={user:null,error:null}; async componentDidMount(){try{const response=await fetch('https://api.randomuser.me/'); const data=await response.json(); this.setState({user:data.results[0]});}catch(error){this.setState({error:error.message});}} render(){const user=this.state.user; return <section className="panel"><h1>Random User</h1>{this.state.error&&<p className="danger">{this.state.error}</p>}{user?<div><img src={user.picture.large} alt={user.name.first}/><h2>{user.name.title}. {user.name.first}</h2></div>:<p>Loading user...</p>}</section>}}
+export default function App(){return <main className="app"><Getuser/></main>}
